@@ -7,16 +7,23 @@ class School(models.Model):
     name = models.CharField(max_length=200)
     city = models.CharField(max_length=200)
     division = models.CharField(max_length=200)
-    region = models.IntegerField()
-    district = models.IntegerField()
+    region = models.IntegerField(blank=True, null=True)
+    district = models.IntegerField(blank=True, null=True)
+    
+    def __unicode__(self):
+        return u"%s" % self.name
 
-class Student(models.Model):
+class Member(models.Model):
     first = models.CharField(max_length=200)
     last = models.CharField(max_length=200)
     school = models.ForeignKey(School)
-    member_id = models.CharField(max_length=200)
-    gpa = models.FloatField()
-    grad_year = models.IntegerField()
-    num_years = models.IntegerField()
-    courses = models.CharField(max_length=200)
-    paid = models.BooleanField()
+    memberid = models.CharField(max_length=200)
+    membertype = models.CharField(max_length=200)
+    gpa = models.FloatField(blank=True, null=True)
+    grad_year = models.IntegerField(blank=True, null=True)
+    num_years = models.IntegerField(blank=True, null=True)
+    courses = models.CharField(max_length=200, blank=True, null=True)
+    paid = models.BooleanField(default=False)
+    
+    def __unicode__(self):
+        return u"%s %s" % (self.first, self.last)
