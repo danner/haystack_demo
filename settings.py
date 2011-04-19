@@ -94,4 +94,14 @@ INSTALLED_APPS = (
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
     'school',
+    'haystack',
 )
+
+#Search Settings
+HAYSTACK_SITECONF = 'haystack_demo.search_sites'
+HAYSTACK_SEARCH_ENGINE = 'simple' #barebones setting, directly hits the database.
+#HAYSTACK_SEARCH_ENGINE = 'whoosh' #run "python manage.py rebuild_index" to initialize search indexes.
+#HAYSTACK_SEARCH_ENGINE = 'solr'
+#HAYSTACK_WHOOSH_PATH = os.path.join(os.path.abspath(os.path.split(os.path.split(__file__)[0])[0]), 'school/whoosh_indexes')
+#HAYSTACK_SOLR_URL = 'localhost:8080/solr'
+#HAYSTACK_REINDEX_TIME = 20*60 # time in seconds betweeen indexing
