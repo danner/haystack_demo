@@ -6,14 +6,24 @@
         {{ form.as_p }}
         <input type="submit" value="Search">
     </form>
+    
+    {% if facets.fields.school %}
+    <h2>School Facets</h2>
+    <ul>
+        {% for school in facets.fields.school|slice:":15" %}
+            {% if school.1 %}
+            <li><a href="{{request.get_full_path}}&amp;selected_facets=school_exact:&quot;{{ school.0|urlencode }}&quot;">{{ school.0 }}</a> ({{ school.1 }})</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
 
-        {% if query %}
-            <h3>Results</h3>
-
-            {% for result in page.object_list %}
-                <p>{{ result.object.first }} {{ result.object.last }} - {{ result.object.gpa }}</p>
-            {% empty %}
-                <p>No results found.</p>
-            {% endfor %}
-        {% endif %}
+    <h2>Results - {{paginator.count}}</h2>
+    <ul>
+    {% for result in page.object_list %}
+        <li>{{ result.object.first }} {{ result.object.last }} - {{ result.object.gpa }}</li>
+    {% empty %}
+        <p>No results found.</p>
+    {% endfor %}
+    </ul>
 {% endblock %}
