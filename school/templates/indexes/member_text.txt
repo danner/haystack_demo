@@ -1,0 +1,2 @@
+{{object.first}} {{object.last}}
+{{object.school.name}} {{object.school.city}} {{object.school.division}}
