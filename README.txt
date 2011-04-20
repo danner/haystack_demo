@@ -1,7 +1,5 @@
 Haystack Demo @ CustomMade.com
 
-wireless: nitrox36
-
 What?
 Why?
 
