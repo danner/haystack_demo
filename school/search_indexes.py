@@ -10,14 +10,11 @@ class MemberIndex(SearchIndex):
 
     def get_queryset(self):
         return Member.objects.all()
-        
+
     def prepare_boost(self, object):
         boost = 1.0
         if object.id == 45:
             boost *= 5
         return boost
-
-class SchoolIndex(SearchIndex):
-    text
 
 site.register(Member, MemberIndex)
