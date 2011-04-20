@@ -1,16 +1,11 @@
 from django.conf.urls.defaults import *
 
-# Uncomment the next two lines to enable the admin:
-# from django.contrib import admin
-# admin.autodiscover()
+import school.views
+import school.forms
+from haystack.query import SearchQuerySet
+
+sqs = SearchQuerySet().facet('school')
 
 urlpatterns = patterns('',
-    # Example:
-    # (r'^haystack_demo/', include('haystack_demo.foo.urls')),
-
-    # Uncomment the admin/doc line below to enable admin documentation:
-    # (r'^admin/doc/', include('django.contrib.admindocs.urls')),
-
-    # Uncomment the next line to enable the admin:
-    # (r'^admin/', include(admin.site.urls)),
+    (r'^$', school.views.FacetSearchView(form_class=school.forms.FacetSearchForm, searchqueryset=sqs, template='search.html')),
 )

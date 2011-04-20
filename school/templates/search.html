@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>Search</h2>
+    <form method="get" action=".">
+        {{ form.as_p }}
+        <input type="submit" value="Search">
+    </form>
+    
+    {% if facets.fields.school %}
+    <h2>School Facets</h2>
+    <ul>
+        {% for school in facets.fields.school|slice:":15" %}
+            {% if school.1 %}
+            <li><a href="{{request.get_full_path}}&amp;selected_facets=school_exact:&quot;{{ school.0|urlencode }}&quot;">{{ school.0 }}</a> ({{ school.1 }})</li>
+            {% endif %}
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <h2>Results - {{paginator.count}}</h2>
+    <ul>
+    {% for result in page.object_list %}
+        <li>{{ result.object.first }} {{ result.object.last }} - {{ result.object.gpa }}</li>
+    {% empty %}
+        <p>No results found.</p>
+    {% endfor %}
+    </ul>
+{% endblock %}
